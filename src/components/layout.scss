@@ -1,0 +1,29 @@
+$secondary-color: black;
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Open Sans";
+}
+
+.socials li {
+  margin: 0px 5px 0px 5px;
+  padding: 5px 0 5px 0;
+}
+
+.nate-verticalBarContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.nate-verticalBar {
+  background-color: $secondary-color;
+  height: 60%;
+  width: 4px;
+}
