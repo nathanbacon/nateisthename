@@ -25,7 +25,7 @@ export default function Layout({ children }) {
   const bgColor = "black";
 
   return (
-    <div>
+    <div className="root">
       <div className="top-bar">
         <div className="top-bar-left">
           <ul className="menu">
@@ -33,32 +33,39 @@ export default function Layout({ children }) {
               <h3 id="site-title">{data.site.siteMetadata.title}</h3>
             </li>
             <li>
-              <div className="nate-verticalBarContainer">
-                <div className="nate-verticalBar"></div>
+              <div className="verticalBarContainer">
+                <div className="verticalBar"></div>
               </div>
+            </li>
+            <li>
+              <ul className="top-bar-links">
+                <li>
+                  <a href="#">Dashboard</a>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
         <div className="socials top-bar-right">
           <ul className="menu">
             {socials.map((url) => (
-              <li>
+              <li key={url}>
                 <SocialIcon url={url} bgColor={bgColor} fgColor={fgColor} />
               </li>
             ))}
           </ul>
         </div>
       </div>
+
       <main>{children}</main>
-      <footer></footer>
+
+      <footer>
+        <div>
+          <a href={data.site.siteMetadata.howIBuiltThis}>
+            <h4>How I built this site</h4>
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
-
-/*
-<nav>
-          <a href="#">
-            <span>Home</span>
-          </a>
-        </nav>
-        */
