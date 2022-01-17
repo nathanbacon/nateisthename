@@ -1,14 +1,10 @@
 $secondary-color: black;
 
 @import url(./styles/top-bar.scss);
+@import url(./styles/main.scss);
 
 body {
   font-family: "Open Sans";
-}
-
-.socials li {
-  margin: 0px 5px 0px 5px;
-  padding: 5px 0 5px 0;
 }
 
 .verticalBarContainer {

@@ -7,5 +7,23 @@ module.exports = {
     twitterUrl: "https://twitter.com/nathan_gelman",
     howIBuiltThis: "https://github.com/nathanbacon/nateisthename",
   },
-  plugins: ["gatsby-plugin-sass"],
+  plugins: [
+    "gatsby-plugin-sass",
+    {
+      resolve: "gatsby-plugin-s3",
+      options: {
+        bucketName: "nateisthe.name",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        name: "nateisthe.name",
+        short_name: "nateisthe.name",
+        start_url: "/",
+        display: "standalone",
+        icon: "src/images/icon.png",
+      },
+    },
+  ],
 };

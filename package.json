@@ -12,14 +12,16 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "deploy": "gatsby-plugin-s3 deploy"
   },
   "dependencies": {
     "@fontsource/open-sans": "^4.5.2",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
-    "foundation-sites": "^6.7.4",
     "gatsby": "4.5.2",
+    "gatsby-plugin-manifest": "^4.5.1",
+    "gatsby-plugin-s3": "^0.3.8",
     "gatsby-plugin-sass": "^5.5.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",

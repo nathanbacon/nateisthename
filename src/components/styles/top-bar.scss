@@ -2,7 +2,6 @@ ul.menu > li {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 5px;
 }
 
 .top-bar-links {
@@ -14,6 +13,11 @@ ul.menu > li {
   flex-direction: column;
   justify-content: center;
   height: 100%;
+}
+
+.socials li {
+  margin: 0px 5px 0px 5px;
+  padding: 10px 0;
 }
 
 .top-bar {
@@ -49,7 +53,7 @@ ul.menu > li {
 }
 
 .menu .menu-text {
-  padding: 0.7rem 1rem;
+  padding: 0.4rem 0.5rem;
   font-weight: 700;
   line-height: 1;
   color: inherit;
