@@ -1,5 +1,5 @@
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, Link } from "gatsby";
 import { SocialIcon } from "react-social-icons";
 import "./layout.scss";
 
@@ -12,10 +12,12 @@ export default function Layout({ children }) {
           githubUrl
           linkedinUrl
           twitterUrl
+          howIBuiltThis
         }
       }
     }
   `);
+
   const socials = [
     data.site.siteMetadata.githubUrl,
     data.site.siteMetadata.linkedinUrl,
@@ -40,7 +42,10 @@ export default function Layout({ children }) {
             <li>
               <ul className="top-bar-links">
                 <li>
-                  <a href="#">Dashboard</a>
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                  <Link to="/reviews">Kanji Reviews</Link>
                 </li>
               </ul>
             </li>
@@ -62,7 +67,7 @@ export default function Layout({ children }) {
       <footer>
         <div>
           <a href={data.site.siteMetadata.howIBuiltThis}>
-            <h4>How I built this site</h4>
+            How I built this site
           </a>
         </div>
       </footer>

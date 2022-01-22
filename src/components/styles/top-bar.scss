@@ -59,6 +59,14 @@ ul.menu > li {
   color: inherit;
 }
 
+.top-bar-links {
+  display: flex;
+}
+
+.top-bar-links > li {
+  padding: 0 10px;
+}
+
 @media (max-width: 800px) {
   .top-bar {
     flex-direction: column;
