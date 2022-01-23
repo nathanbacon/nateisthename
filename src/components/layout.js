@@ -67,7 +67,7 @@ export default function Layout({ children }) {
       <footer>
         <div>
           <a href={data.site.siteMetadata.howIBuiltThis}>
-            How I built this site
+            <h2>How I built this site</h2>
           </a>
         </div>
       </footer>
