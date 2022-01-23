@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/layout";
 import { useStaticQuery, graphql } from "gatsby";
 import { Review } from "../types/review";
+import { Bar } from "react-chartjs-2";
 
 const ReviewsDashboard = () => {
   const data = useStaticQuery(graphql`
@@ -30,6 +31,7 @@ const ReviewsDashboard = () => {
           <li key={review.assignment_id}>{review.created_at}</li>
         ))}
       </ul>
+      <canvas id="reviewChart" width={400} height={400}></canvas>
     </Layout>
   );
 };
