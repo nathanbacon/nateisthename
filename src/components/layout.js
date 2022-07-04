@@ -1,6 +1,8 @@
 import React from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import "./layout.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default function Layout({ children }) {
   const data = useStaticQuery(graphql`
@@ -44,7 +46,13 @@ export default function Layout({ children }) {
           </ul>
         </div>
         <div className="socials top-bar-right">
-          <ul className="menu"></ul>
+          <ul className="menu">
+            <li>
+              <a href={data.site.siteMetadata.githubUrl}>
+                <FontAwesomeIcon icon={faGithub} size="2x" />
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
