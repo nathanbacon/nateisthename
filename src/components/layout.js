@@ -1,6 +1,5 @@
 import React from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
-import { SocialIcon } from "react-social-icons";
 import "./layout.scss";
 
 export default function Layout({ children }) {
@@ -40,25 +39,12 @@ export default function Layout({ children }) {
               </div>
             </li>
             <li>
-              <ul className="top-bar-links">
-                <li>
-                  <Link to="/dashboard">Dashboard</Link>
-                </li>
-                <li>
-                  <Link to="/reviews">Kanji Reviews</Link>
-                </li>
-              </ul>
+              <ul className="top-bar-links"></ul>
             </li>
           </ul>
         </div>
         <div className="socials top-bar-right">
-          <ul className="menu">
-            {socials.map((url) => (
-              <li key={url}>
-                <SocialIcon url={url} bgColor={bgColor} fgColor={fgColor} />
-              </li>
-            ))}
-          </ul>
+          <ul className="menu"></ul>
         </div>
       </div>
 

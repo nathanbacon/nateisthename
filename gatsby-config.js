@@ -18,12 +18,6 @@ module.exports = {
   plugins: [
     "gatsby-plugin-sass",
     {
-      resolve: "gatsby-plugin-s3",
-      options: {
-        bucketName: "nateisthe.name",
-      },
-    },
-    {
       resolve: "gatsby-plugin-manifest",
       options: {
         name: "nateisthe.name",
