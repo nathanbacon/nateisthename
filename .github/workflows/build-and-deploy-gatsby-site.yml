@@ -36,5 +36,5 @@ jobs:
       - name: Build
         run: gatsby build
 
-      -run: |
-        az storage blob upload-batch -s public -d '$web' --account-name nateisthename --overwrite
+      - run: |
+          az storage blob upload-batch -s public -d '$web' --account-name nateisthename --overwrite
