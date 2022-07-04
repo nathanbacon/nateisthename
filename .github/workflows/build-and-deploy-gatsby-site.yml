@@ -26,6 +26,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
 
       - name: Install Project Dependencies
         run: npm ci
@@ -38,3 +39,7 @@ jobs:
 
       - run: |
           az storage blob upload-batch -s public -d '$web' --account-name nateisthename --overwrite
+
+      - run: |
+          az cdn endpoint purge \
+          -g nateisthename -n nateisthenamecdnendpoint --profile-name nateisthenamecdnprofile --content-paths '/'
