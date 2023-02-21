@@ -116,6 +116,9 @@ resource "azurerm_dns_cname_record" "dns_cname_record_www" {
 }
 
 resource "azurerm_cdn_endpoint_custom_domain" "custom_domain_www" {
+  depends_on = [
+    azurerm_dns_cname_record.dns_cname_record_www
+  ]
   name            = "www-domain"
   cdn_endpoint_id = azurerm_cdn_endpoint.cdn_endpoint.id
   host_name       = "www.${var.domain}"
@@ -129,7 +132,6 @@ resource "azurerm_dns_a_record" "dns_alias_record" {
   target_resource_id  = azurerm_cdn_endpoint.cdn_endpoint.id
 }
 
-/*
 resource "azurerm_cdn_endpoint_custom_domain" "custom_domain" {
   depends_on = [
     azurerm_dns_a_record.dns_alias_record
@@ -138,4 +140,3 @@ resource "azurerm_cdn_endpoint_custom_domain" "custom_domain" {
   cdn_endpoint_id = azurerm_cdn_endpoint.cdn_endpoint.id
   host_name       = var.domain
 }
-*/
