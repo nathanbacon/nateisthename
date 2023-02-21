@@ -1,13 +1,17 @@
-import * as React from "react";
-import Layout from "../components/layout";
+import * as React from "react"
+import { Link } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
 
-// markup
-const IndexPage = () => {
-  return (
-    <Layout>
-      <p>Hello, world!</p>
-    </Layout>
-  );
-};
+import Layout from "../components/layout"
+import Seo from "../components/seo"
 
-export default IndexPage;
+const IndexPage = () => <Layout></Layout>
+
+/**
+ * Head export to define metadata for the page
+ *
+ * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
+ */
+export const Head = () => <Seo title="Home" />
+
+export default IndexPage
