@@ -107,6 +107,10 @@ data "azurerm_dns_zone" "dns_zone" {
   resource_group_name = "dnszones"
 }
 
+// useful commands for deleteing custom domains
+// az feature register --namespace Microsoft.Network --name BypassCnameCheckForCustomDomainDeletion
+// az feature unregister --namespace Microsoft.Network --name BypassCnameCheckForCustomDomainDeletion
+
 resource "azurerm_dns_cname_record" "dns_cname_record_www" {
   name                = "www"
   zone_name           = data.azurerm_dns_zone.dns_zone.name
@@ -115,28 +119,10 @@ resource "azurerm_dns_cname_record" "dns_cname_record_www" {
   target_resource_id  = azurerm_cdn_endpoint.cdn_endpoint.id
 }
 
-resource "azurerm_cdn_endpoint_custom_domain" "custom_domain_www" {
-  depends_on = [
-    azurerm_dns_cname_record.dns_cname_record_www
-  ]
-  name            = "www-domain"
-  cdn_endpoint_id = azurerm_cdn_endpoint.cdn_endpoint.id
-  host_name       = "www.${var.domain}"
-}
-
 resource "azurerm_dns_a_record" "dns_alias_record" {
   name                = "@"
   zone_name           = data.azurerm_dns_zone.dns_zone.name
   resource_group_name = data.azurerm_dns_zone.dns_zone.resource_group_name
   ttl                 = 3600
   target_resource_id  = azurerm_cdn_endpoint.cdn_endpoint.id
-}
-
-resource "azurerm_cdn_endpoint_custom_domain" "custom_domain" {
-  depends_on = [
-    azurerm_dns_a_record.dns_alias_record
-  ]
-  name            = "domain"
-  cdn_endpoint_id = azurerm_cdn_endpoint.cdn_endpoint.id
-  host_name       = var.domain
 }
