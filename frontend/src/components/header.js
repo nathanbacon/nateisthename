@@ -2,17 +2,17 @@ import * as React from "react"
 import { Link } from "gatsby"
 
 const Header = ({ siteTitle }) => (
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+  <nav className="navbar navbar-expand-lg navbar-light bg-light bg-body-tertiary">
+    <div className="container-fluid">
+      <Link className="navbar-brand" to="/">
         {siteTitle}
-      </a>
+      </Link>
 
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <Link className="nav-link" to="/inquire/">
             Inquire
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
