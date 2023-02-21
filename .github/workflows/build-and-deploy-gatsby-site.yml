@@ -81,8 +81,9 @@ jobs:
         run: gatsby build
 
       - run: |
-          cd './frontend'
           az storage blob upload-batch -s public -d '$web' --account-name nateisthename --overwrite
+        name: Upload to blob
+        working-directory: ./frontend
 
       - run: |
           az cdn endpoint purge \
