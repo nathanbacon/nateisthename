@@ -2,10 +2,16 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.0.2"
+      version = "3.44.1"
     }
   }
 
+  backend "azurerm" {
+    resource_group_name  = "tfstateresources"
+    storage_account_name = "ngtfstate21823"
+    container_name       = "tfstatenateisthename"
+    key                  = "terraform.tfstate"
+  }
   required_version = ">= 1.1.0"
 }
 
@@ -97,7 +103,7 @@ resource "azurerm_cdn_endpoint" "cdn_endpoint" {
 }
 
 data "azurerm_dns_zone" "dns_zone" {
-  name = var.domain
+  name                = var.domain
   resource_group_name = "dnszones"
 }
 
@@ -115,8 +121,21 @@ resource "azurerm_cdn_endpoint_custom_domain" "custom_domain_www" {
   host_name       = "www.${var.domain}"
 }
 
+resource "azurerm_dns_a_record" "dns_alias_record" {
+  name                = "@"
+  zone_name           = data.azurerm_dns_zone.dns_zone.name
+  resource_group_name = data.azurerm_dns_zone.dns_zone.resource_group_name
+  ttl                 = 3600
+  target_resource_id = azurerm_cdn_endpoint.cdn_endpoint.id
+}
+
+/*
 resource "azurerm_cdn_endpoint_custom_domain" "custom_domain" {
+  depends_on = [
+    azurerm_dns_a_record.dns_alias_record
+  ]
   name            = "domain"
   cdn_endpoint_id = azurerm_cdn_endpoint.cdn_endpoint.id
   host_name       = var.domain
 }
+*/

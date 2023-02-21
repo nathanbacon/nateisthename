@@ -1,5 +1,5 @@
 variable "website_name" {
-  default = "nateisthename"
+  default = "nathangelman"
 }
 
 variable "location" {
