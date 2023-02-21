@@ -1,0 +1,55 @@
+# Ignore build output
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+*.opensdf
+*.opendb
+*.VC.db
+*.VC.VC.opendb
+
+# Ignore NuGet packages
+*.nupkg
+packages/
+project.lock.json
+*.nuget.props
+*.nuget.targets
+
+# Ignore Visual Studio files
+.vs/
+*.userprefs
+*.usertasks
+*.sln.ide
+*.suo
+*.user
+
+# Ignore ReSharper files
+_ReSharper*/
+*.resharper
+
+# Ignore test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+.DS_Store
+
+.vscode/

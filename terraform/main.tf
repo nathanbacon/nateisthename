@@ -38,91 +38,32 @@ resource "azurerm_storage_account" "sa" {
   }
 }
 
-resource "azurerm_cdn_profile" "cdn_profile" {
-  name                = "${var.website_name}cdnprofile"
-  location            = "Global"
+resource "azurerm_storage_account" "function_storage" {
+  name                     = "functionsamandelbrot"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
+resource "azurerm_service_plan" "functions_app_service_plan" {
+  name                = "nathan-app-service-plan"
   resource_group_name = azurerm_resource_group.rg.name
-  sku                 = "Standard_Microsoft"
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Linux"
+  sku_name            = "Y1"
 }
 
-resource "azurerm_cdn_endpoint" "cdn_endpoint" {
-  name                   = "${var.website_name}cdnendpoint"
-  profile_name           = azurerm_cdn_profile.cdn_profile.name
-  location               = azurerm_cdn_profile.cdn_profile.location
-  resource_group_name    = azurerm_resource_group.rg.name
-  origin_host_header     = azurerm_storage_account.sa.primary_web_host
-  is_compression_enabled = true
-  content_types_to_compress = [
-    "application/eot",
-    "application/font",
-    "application/font-sfnt",
-    "application/javascript",
-    "application/json",
-    "application/opentype",
-    "application/otf",
-    "application/pkcs7-mime",
-    "application/truetype",
-    "application/ttf",
-    "application/vnd.ms-fontobject",
-    "application/xhtml+xml",
-    "application/xml",
-    "application/xml+rss",
-    "application/x-font-opentype",
-    "application/x-font-truetype",
-    "application/x-font-ttf",
-    "application/x-httpd-cgi",
-    "application/x-javascript",
-    "application/x-mpegurl",
-    "application/x-opentype",
-    "application/x-otf",
-    "application/x-perl",
-    "application/x-ttf",
-    "font/eot",
-    "font/ttf",
-    "font/otf",
-    "font/opentype",
-    "image/svg+xml",
-    "text/css",
-    "text/csv",
-    "text/html",
-    "text/javascript",
-    "text/js",
-    "text/plain",
-    "text/richtext",
-    "text/tab-separated-values",
-    "text/xml",
-    "text/x-script",
-    "text/x-component",
-    "text/x-java-source"
-  ]
+resource "azurerm_linux_function_app" "function_app" {
+  name                = "nateisthename-function-app"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
 
-  origin {
-    host_name = azurerm_storage_account.sa.primary_web_host
-    name      = "origin"
+  storage_account_name       = azurerm_storage_account.function_storage.name
+  storage_account_access_key = azurerm_storage_account.function_storage.primary_access_key
+  service_plan_id            = azurerm_service_plan.functions_app_service_plan.id
+
+  site_config {
+
   }
-}
-
-data "azurerm_dns_zone" "dns_zone" {
-  name                = var.domain
-  resource_group_name = "dnszones"
-}
-
-// useful commands for deleteing custom domains
-// az feature register --namespace Microsoft.Network --name BypassCnameCheckForCustomDomainDeletion
-// az feature unregister --namespace Microsoft.Network --name BypassCnameCheckForCustomDomainDeletion
-
-resource "azurerm_dns_cname_record" "dns_cname_record_www" {
-  name                = "www"
-  zone_name           = data.azurerm_dns_zone.dns_zone.name
-  resource_group_name = data.azurerm_dns_zone.dns_zone.resource_group_name
-  ttl                 = 3600
-  target_resource_id  = azurerm_cdn_endpoint.cdn_endpoint.id
-}
-
-resource "azurerm_dns_a_record" "dns_alias_record" {
-  name                = "@"
-  zone_name           = data.azurerm_dns_zone.dns_zone.name
-  resource_group_name = data.azurerm_dns_zone.dns_zone.resource_group_name
-  ttl                 = 3600
-  target_resource_id  = azurerm_cdn_endpoint.cdn_endpoint.id
 }
