@@ -29,43 +29,24 @@ export default function Layout({ children }) {
   const bgColor = "black";
 
   return (
-    <div className="root">
-      <div className="top-bar">
-        <div className="top-bar-left">
-          <ul className="menu">
-            <li className="menu-text">
-              <h3 id="site-title">{data.site.siteMetadata.title}</h3>
-            </li>
-            <li>
-              <div className="verticalBarContainer">
-                <div className="verticalBar"></div>
-              </div>
-            </li>
-            <li>
-              <ul className="top-bar-links"></ul>
-            </li>
-          </ul>
-        </div>
-        <div className="socials top-bar-right">
-          <ul className="menu">
-            <li>
-              <a href={data.site.siteMetadata.githubUrl}>
-                <FontAwesomeIcon icon={faGithub} size="2x" />
-              </a>
-            </li>
-          </ul>
-        </div>
+    <div className="header">
+      <div className="pure-menu pure-munu-horizontal pure-menu-fixed">
+        <a href="" className="pure-menu-heading">
+          nateisthe.name
+        </a>
+        <ul className="pure-menu-list">
+          <li className="pure-menu-item">
+            <a href="#" className="pure-menu-link">
+              Home
+            </a>
+          </li>
+          <li className="pure-menu-item">
+            <a href="#" className="pure-menu-link">
+              Inquire
+            </a>
+          </li>
+        </ul>
       </div>
-
-      <main>{children}</main>
-
-      <footer>
-        <div>
-          <a href={data.site.siteMetadata.howIBuiltThis}>
-            <h2>How I built this site</h2>
-          </a>
-        </div>
-      </footer>
     </div>
   );
 }
