@@ -39,7 +39,7 @@ resource "azurerm_storage_account" "sa" {
 }
 
 resource "azurerm_storage_account" "function_storage" {
-  name                     = "functionsamandelbrot"
+  name                     = "nateisthenamesa"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
