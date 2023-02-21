@@ -126,7 +126,7 @@ resource "azurerm_dns_a_record" "dns_alias_record" {
   zone_name           = data.azurerm_dns_zone.dns_zone.name
   resource_group_name = data.azurerm_dns_zone.dns_zone.resource_group_name
   ttl                 = 3600
-  target_resource_id = azurerm_cdn_endpoint.cdn_endpoint.id
+  target_resource_id  = azurerm_cdn_endpoint.cdn_endpoint.id
 }
 
 /*
