@@ -70,15 +70,19 @@ jobs:
           cache: "npm"
 
       - name: Install Project Dependencies
+        working-directory: ./frontend
         run: npm ci
 
       - name: Install Gatsby CLI
+        working-directory: ./frontend
         run: npm install -g gatsby-cli@${{ env.GATSBY_CLI_VERSION }}
 
       - name: Build
+        working-directory: ./frontend
         run: gatsby build
 
       - run: |
+          cd './frontend'
           az storage blob upload-batch -s public -d '$web' --account-name nateisthename --overwrite
 
       - run: |
