@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DOTNET_VERSION: "6.0.x"
-      AZURE_WEBAPP_PACKAGE_PATH: "./"
+      AZURE_WEBAPP_PACKAGE_PATH: "./functions"
       AZURE_WEBAPP_NAME: nateisthename-function-app
 
     steps:
@@ -72,10 +72,10 @@ jobs:
 
       - name: Build
         run: |
+          cd ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
           dotnet restore
           dotnet build --configuration Release
-          dotnet publish '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/NateFunctions/NateFunctions.csproj' -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/NateFunctionsBuild'
-        working-directory: ./functions
+          dotnet publish './NateFunctions/NateFunctions.csproj' -c Release -o 'NateFunctionsBuild'
 
       - name: Login to Azure
         uses: azure/login@v1
@@ -87,7 +87,6 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/NateFunctionsBuild"
-          working-directory: ./functions
 
       - name: Logout
         run: |
